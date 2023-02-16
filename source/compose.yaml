@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: real-postgres
+    hostname: postgres
+    # platform: linux/amd64 #for platform error on Apple M1 chips
+    env_file: ./.env
+    volumes:
+      - real-data:/var/lib/postgresql/data
+    restart: unless-stopped
+    ports:
+      - 5432:5432
+    # networks:
+    #   - real-network
+
+volumes:
+  real-data:
+    # external: true
+# networks:
+#   real-network:
+#     external: true
